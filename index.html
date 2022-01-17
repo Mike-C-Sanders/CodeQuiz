@@ -10,13 +10,34 @@
     </head>
     <body>
         <header>
-            <h3 class="view-highscores">View Highscores</h3>
-            <h3>Timer: 55</h3>
+            <h2 class="view-high-scores">View High Scores</h2>
+            <div class="timer-card">
+                <div class="timer-text">
+                    <div class="timer-count">Time: 75</div>
+                </div>
+
+            </div>
         </header>
         <main>
-            <h1 class="main-header">JavaScript Quiz</h1>
-            <p>The following quiz is based on JavaScript fundamentals. Each question or fill in the blank will provide 4 multiple choice options, each correct answer will increase your score and each wrong answer will subtract from your available time. You have 75 seconds to answer 5 questions. Select the answer </p>
-            <button>Start Quiz</button>
+            <!-- Section is for the main game window -->
+            <section class="main-section">
+                <!-- Displays the question and main header for game window -->
+                <div class="title-box">
+                    <h1 class="main-header">JavaScript Quiz</h1>
+                </div>
+                <!-- Main text area. Most likely will be blank during the game as the question will be displayed in the  -->
+                <article class="main-text">
+                    <p>The following quiz is based on JavaScript fundamentals. Each question or fill in the blank will provide 4 multiple choice options, each correct answer will increase your score and each wrong answer will subtract from your available time. You have 75 seconds to answer 5 questions. Select the answer </p>
+                </article>
+                <!-- Container will have more buttons as the game continues -->
+                <div class="buttons">
+                    <button>Start Quiz</button>
+                </div>
+                <!-- Placement of the answer -->
+                <div class="answer-box">
+
+                </div>
+            </section>
         </main>
         <script src="./js/questions.js"></script>
         <script src="./js/quiz.js"></script>

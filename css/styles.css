@@ -5,3 +5,67 @@
     padding: 0;
     position: relative;
 }
+
+/** Header will display the viewhighscore text and the timer countdown.  */
+header{
+    display:flex;
+    justify-content: space-between;
+}
+
+button{
+    background: radial-gradient(circle, rgba(240,230,140,1) 0%, rgba(187,96,33,0.9542191876750701) 100%);
+    border-radius: 8px;
+    color: #13293d;
+    cursor: pointer;
+    font-size: 2em;
+    letter-spacing: 0.21px;
+    line-height: 16px;
+    max-width: 255px;
+    padding: 20px 52px;
+    text-align: center;
+    transition-duration: 0.15s;
+    transition-property: background-color;
+    transition-timing-function: linear;
+    margin-top: 0.6em;
+}
+
+/* The class container for view high scores text. When clicked the user will go to the high score page */
+.view-high-scores{
+    font-size: 25px;
+}
+
+.timer-count{
+    font-size: 20px;
+}
+
+/** Main section containing the game window */
+
+.main-section{
+    display:flex;
+    background: lightgoldenrodyellow;
+    justify-content: center;
+    margin-left:12.5%;
+    margin-right:12.5%;
+    flex-wrap: wrap;
+    text-align: center;
+    border: black 2px solid;
+}
+
+/* Header class for main section */
+.title-box{
+    width: 100%;
+    padding: 15px;
+}
+.main-header{
+    width: 100%;
+    align-items: center;
+}
+
+.main-text{
+    width:100%;
+    padding: 15px;
+}
+
+.buttons{
+
+}
