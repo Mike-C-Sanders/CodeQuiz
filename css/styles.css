@@ -34,8 +34,13 @@ button{
     font-size: 25px;
 }
 
-.timer-count{
+.timer-text{
+    display:flex;
+    justify-content: space-evenly;
     font-size: 20px;
+}
+.timer-count{
+    padding-left: 5px;
 }
 
 /** Main section containing the game window */
