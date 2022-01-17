@@ -1,5 +1,3 @@
-//TODO: Check Answer Function
-
 //TODO: Build View Highscore Function
 
 //TODO: Build Win Condition
@@ -18,14 +16,14 @@ var questionsLength = questions.length;
 var totalScore = 0;
 var timer;
 var timerCount;
-var qIndex = 0;
+var qIndex;
 var answerButtons = [];
 
 var startGame = function(){
     timerCount = 75;
+    qIndex = 0;
     //Hide the start button from the screen
     mainText.style.display = "none";
-    startButton.style.display = "none";
     //timer starts
     startTimer();
     //display question and render button
@@ -49,12 +47,21 @@ var startTimer = function(){
 
 //displays questions and answers
 var displayQuestions = function(){
+    //if the qIndex has exceeded the number of questions leave the function.
+    if((qIndex >= questionsLength) || (timerCount === 0)){
+        removeButtons(buttonEl);
+        clearInterval(timer);
+        return;
+    }
+    //Remove all buttons
+    removeButtons(buttonEl);
     //display the question
     mainHeader.textContent = questions[qIndex].title;
     //create buttons for possible answers
     createButtons();
     //Add event listener and check answer
     answerEvent();
+
 };
 
 //Create Buttons Function
@@ -74,7 +81,9 @@ var answerEvent = function(){
     var btns = document.querySelectorAll('.btn')
     btns.forEach(function(i){
         i.addEventListener('click', function(){
-            checkAnswer(i)
+            checkAnswer(i);
+            qIndex++;
+            displayQuestions();
         });
     });
     
@@ -90,8 +99,16 @@ var checkAnswer = function(index){
     else{
         console.log(index.textContent);
         answerBox.textContent = "Wrong!";
+        timerCount-=5;
     }
 }
 
+
+//Function to remove all buttons
+var removeButtons = function(parent){
+    while(parent.firstChild){
+        parent.removeChild(parent.firstChild);
+    }
+}
 //Function called to start the game. Attached to the start quiz button.
 startButton.addEventListener('click', startGame);
