@@ -1,3 +1,4 @@
+//* An array of question objects. Each question has a title, choices, and answer.
 var questions = [
     {
         title: "Commonly used data types DO NOT include:",
