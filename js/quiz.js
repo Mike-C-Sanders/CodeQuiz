@@ -2,8 +2,6 @@
 
 //TODO: Build View Highscore Function
 
-//TODO: Build Time Function
-
 //TODO: Build Win Condition
 
 //TODO: Build Function to walk through array and create the boxes.
@@ -14,6 +12,7 @@ var timerEl = document.querySelector('.timer-count');
 var mainText = document.querySelector('.main-text');
 var startButton = document.querySelector('.start-game');
 var buttonEl = document.querySelector('.buttons');
+var answerBox = document.querySelector('.answer-box')
 
 var questionsLength = questions.length;
 var totalScore = 0;
@@ -50,20 +49,49 @@ var startTimer = function(){
 
 //displays questions and answers
 var displayQuestions = function(){
+    //display the question
     mainHeader.textContent = questions[qIndex].title;
+    //create buttons for possible answers
     createButtons();
+    //Add event listener and check answer
+    answerEvent();
 };
-//Create Buttons Function
 
+//Create Buttons Function
 var createButtons = function(){
     var choicesLen = questions[qIndex].choices.length;
-    
+
     for(var i = 0; i < choicesLen; i++){
         answerButtons[i] = document.createElement('button');
         answerButtons[i].textContent = questions[qIndex].choices[i];
+        answerButtons[i].classList.add('btn');
         buttonEl.appendChild(answerButtons[i]);
     }
-
 }
+
+//Event Listener loop before check answer
+var answerEvent = function(){
+    var btns = document.querySelectorAll('.btn')
+    btns.forEach(function(i){
+        i.addEventListener('click', function(){
+            checkAnswer(i)
+        });
+    });
+    
+}
+
+//Function to Check Answers
+var checkAnswer = function(index){
+    if(index.textContent === questions[qIndex].answer){
+        console.log(index.textContent);
+        answerBox.textContent = "CORRECT!!";
+        totalScore++;
+    }
+    else{
+        console.log(index.textContent);
+        answerBox.textContent = "Wrong!";
+    }
+}
+
 //Function called to start the game. Attached to the start quiz button.
 startButton.addEventListener('click', startGame);
