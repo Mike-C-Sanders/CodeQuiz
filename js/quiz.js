@@ -118,9 +118,20 @@ var endGame = function(){
     logScore();
 }
 
-//Loging the score for the quiz 
+//Logging the score for the quiz 
 var logScore = function(){
     createForm();
+    var submit = document.querySelector('.submit-button');
+    
+    submit.addEventListener('click', function(event){
+        var initials = document.querySelector('#initial-capture').value;
+        console.log(initials.value);
+        event.preventDefault();
+        localStorage.setItem("Initials", initials);
+        localStorage.setItem("totalScore", totalScore);
+
+    })
+
 }
 
 //Create Form Submission Box
@@ -133,11 +144,13 @@ var createForm = function(){
     
     var initials = document.createElement("input");
     initials.setAttribute("type", "text");
-    initials.setAttribute("name", "YourInitials");
+    initials.setAttribute("name", "initial-capture");
     initials.setAttribute("placeholder", "Your Intials Here");
+    initials.setAttribute("id", "initial-capture");
     
     var submitButton = document.createElement("button");
     submitButton.textContent = "Submit";
+    submitButton.classList.add('submit-button');
     
     submissionForm.classList.add('submission-form');
     submissionForm.appendChild(initials);
