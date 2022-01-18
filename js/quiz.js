@@ -7,6 +7,7 @@ var mainText = document.querySelector('.main-text');
 var startButton = document.querySelector('.start-game');
 var buttonEl = document.querySelector('.buttons');
 var answerBox = document.querySelector('.answer-box');
+var highScores = localStorage.getItem('highScores');
 
 var questionsLength = questions.length;
 var totalScore = 0;
@@ -14,6 +15,7 @@ var timer;
 var timerCount;
 var qIndex;
 var answerButtons = [];
+var storedObj = [];
 
 var startGame = function(){
     timerCount = 75;
@@ -24,8 +26,6 @@ var startGame = function(){
     startTimer();
     //display question and render button
     displayQuestions();
-    // endGame();
-
 };
 
 
@@ -118,19 +118,45 @@ var endGame = function(){
     logScore();
 }
 
-//Logging the score for the quiz 
+//Logging the score for the quiz to local storage when button is clicked
 var logScore = function(){
     createForm();
     var submit = document.querySelector('.submit-button');
     
+    //event listener for when the user to submit initials and score
     submit.addEventListener('click', function(event){
+        //capture text field from form
         var initials = document.querySelector('#initial-capture').value;
-        console.log(initials.value);
+        //prevent the page from being reset when submitted
         event.preventDefault();
+
+        //store initials and total score in local storage
         localStorage.setItem("Initials", initials);
         localStorage.setItem("totalScore", totalScore);
+        var obj = {
+            "Initials": initials,
+            "totalScore": totalScore
+        };
 
-    })
+        //if the highscores get returns null we don't need to parse the string
+        if(highScores === null){
+            storedObj.push(obj);
+            console.log(storedObj);
+            //push the new scores into stored array and save in local storage over writing highscores
+            localStorage.setItem('highScores', JSON.stringify(storedObj));
+            
+        }
+        //if the highscores variable returns something other than null we need to parse the string because there's local scores already stored
+        else{
+            //return highscores variable to an object with parse method
+            storedObj = JSON.parse(highScores);
+            //add new high score to the array
+            storedObj.push(obj);
+            //put the array into local storage
+            localStorage.setItem('highScores', JSON.stringify(storedObj));
+        }
+
+    });
 
 }
 
