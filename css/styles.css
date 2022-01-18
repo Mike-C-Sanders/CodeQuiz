@@ -10,6 +10,7 @@
 header{
     display:flex;
     justify-content: space-between;
+    padding: 10px
 }
 
 button{
@@ -71,6 +72,9 @@ button{
     padding: 15px;
 }
 
-.buttons{
+.view-high-scores:hover{
+    color: blue;
+    font-style: italic;
+    cursor:pointer;
 
 }

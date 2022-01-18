@@ -1,16 +1,12 @@
 //TODO: Build View Highscore Function
 
-//TODO: Build Win Condition
-
-//TODO: Build Function to walk through array and create the boxes.
-
 //Global Variables
 var mainHeader = document.querySelector('.main-header');
 var timerEl = document.querySelector('.timer-count');
 var mainText = document.querySelector('.main-text');
 var startButton = document.querySelector('.start-game');
 var buttonEl = document.querySelector('.buttons');
-var answerBox = document.querySelector('.answer-box')
+var answerBox = document.querySelector('.answer-box');
 
 var questionsLength = questions.length;
 var totalScore = 0;
@@ -23,15 +19,16 @@ var startGame = function(){
     timerCount = 75;
     qIndex = 0;
     //Hide the start button from the screen
-    mainText.style.display = "none";
+    removeElements(mainText);
     //timer starts
     startTimer();
     //display question and render button
     displayQuestions();
+    // endGame();
 
 };
 
-//TODO: Needs win condition & end of quiz conditions added
+
 var startTimer = function(){
     //check if the questions have been answered
     timer = setInterval(function(){
@@ -39,6 +36,7 @@ var startTimer = function(){
         timerEl.textContent = timerCount;
         if(timerCount === 0){
             clearInterval(timer);
+            endGame();
         }
 
     }, 1000);
@@ -48,20 +46,21 @@ var startTimer = function(){
 //displays questions and answers
 var displayQuestions = function(){
     //if the qIndex has exceeded the number of questions leave the function.
+    mainText.textContent = "Your Score: " + totalScore + "/5"
     if((qIndex >= questionsLength) || (timerCount === 0)){
-        removeButtons(buttonEl);
+        removeElements(buttonEl);
         clearInterval(timer);
+        endGame();
         return;
     }
     //Remove all buttons
-    removeButtons(buttonEl);
+    removeElements(buttonEl);
     //display the question
     mainHeader.textContent = questions[qIndex].title;
     //create buttons for possible answers
     createButtons();
     //Add event listener and check answer
     answerEvent();
-
 };
 
 //Create Buttons Function
@@ -105,10 +104,46 @@ var checkAnswer = function(index){
 
 
 //Function to remove all buttons
-var removeButtons = function(parent){
+var removeElements = function(parent){
     while(parent.firstChild){
         parent.removeChild(parent.firstChild);
     }
+}
+
+//Game comes to an end
+var endGame = function(){
+    mainHeader.textContent = "Thank You! Quiz Completed!";
+    removeElements(buttonEl);
+    removeElements(answerBox);
+    logScore();
+}
+
+//Loging the score for the quiz 
+var logScore = function(){
+    createForm();
+}
+
+//Create Form Submission Box
+var createForm = function(){
+    answerBox.textContent = "Enter Your Intials:";
+    
+    var submissionForm = document.createElement('form');
+    submissionForm.setAttribute("method", "post");
+    submissionForm.setAttribute("action", "submit.php");
+    
+    var initials = document.createElement("input");
+    initials.setAttribute("type", "text");
+    initials.setAttribute("name", "YourInitials");
+    initials.setAttribute("placeholder", "Your Intials Here");
+    
+    var submitButton = document.createElement("button");
+    submitButton.textContent = "Submit";
+    
+    submissionForm.classList.add('submission-form');
+    submissionForm.appendChild(initials);
+    submissionForm.appendChild(submitButton);
+    answerBox.appendChild(submissionForm);
+
 }
 //Function called to start the game. Attached to the start quiz button.
 startButton.addEventListener('click', startGame);
