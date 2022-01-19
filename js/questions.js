@@ -51,3 +51,6 @@ var questions = [
         answer: "console.log"
     }
 ];
+
+//Used when rebooting the game to play again
+var startingText = "The following quiz is based on JavaScript fundamentals. Each question or fill in the blank will provide 4 multiple choice options, each correct answer will increase your score and each wrong answer will subtract from your available time. You have 75 seconds to answer 5 questions."
